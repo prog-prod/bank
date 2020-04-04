@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable  implements MustVerifyEmail
 {
@@ -38,6 +39,9 @@ class User extends Authenticatable  implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return bool
+     */
     public function isAdmin()
     {
         if($this->role === 'admin')
@@ -48,16 +52,28 @@ class User extends Authenticatable  implements MustVerifyEmail
         return false;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function cards()
     {
         return $this->hasMany('App\Card');
     }
 
+    /**
+     * @param int $money
+     * @param int $cardId
+     * @return mixed
+     */
     public function replenishAccount (int $money, int $cardId)
     {
         return $this->cards()->find($cardId)->replenish($money);
     }
 
+    /**
+     * @param string $number
+     * @return bool
+     */
     public function checkCard(string $number)
     {
         $result = [];
@@ -82,6 +98,10 @@ class User extends Authenticatable  implements MustVerifyEmail
         return false;
     }
 
+    /**
+     * @param int|null $number
+     * @return int
+     */
     public function generateCardNumber (int $number = null)
     {
 
@@ -115,6 +135,10 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $number;
     }
 
+    /**
+     * @param array $data
+     * @return bool|mixed
+     */
     public function createCard (array $data)
     {
         if(!$this->checkCard($data['number']))
@@ -135,6 +159,10 @@ class User extends Authenticatable  implements MustVerifyEmail
 
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
     public function deleteCard (int $id)
     {
         return DB::transaction(function() use ($id){
@@ -144,6 +172,10 @@ class User extends Authenticatable  implements MustVerifyEmail
         });
     }
 
+    /**
+     * @param string $avatarName
+     * @return bool
+     */
     public function updateAvatar (string $avatarName)
     {
 
@@ -151,6 +183,107 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->save();
     }
 
+    /**
+     * @param $newPassword
+     * @return bool
+     */
+    public function updatePassword ($newPassword)
+    {
+        $this->password = Hash::make($newPassword);
+        return $this->save();
+    }
+
+    # Transfer money to the user
+
+    /**
+     * @param User $receiver
+     * @param int $amount
+     */
+    public function transferMoney (User $receiver, int $amount)
+    {
+        #1 get random user card
+        $receiverCard = $receiver->cards()->get()->random();
+
+        #2 transfer money
+        DB::beginTransaction();
+
+        try
+        {
+            # replenish receiver card;
+            $receiverCard->replenish($amount);
+
+            #get my cards where amount >= receive money
+            $myCards = $this->cards()->whereHas('account', function ($q) use ($amount) {
+                $q->where('amount','>',$amount-1);
+            })->get();
+
+            if($myCards->isEmpty())
+            {
+                throw new \Exception('There is not enough money in the account to make a transfer');
+            }
+
+            $myCard = $myCards->random();
+
+            # withdraw cash
+            $myCard->withdraw($amount);
+
+            $this->writeToHistory($myCard, $receiverCard, $amount);
+            DB::commit();
+        }
+        catch (\Exception $e)
+        {
+            DB::rollBack();
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * @param Card $myCard
+     * @param Card $receiverCard
+     * @param int $amount
+     */
+    public function writeToHistory (Card $myCard, Card $receiverCard, int $amount): void
+    {
+        $data = [
+            'card_id' => $myCard->id,
+            'receiver_card_id' => $receiverCard->id,
+            'amount' => $amount
+        ];
+        HistoryTransaction::putTransaction($data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWholeAmount ()
+    {
+        return $this->cards()
+            ->leftJoin('accounts',DB::raw('cards.id'),'=', DB::raw('accounts.card_id'))
+            ->sum('amount');
+    }
+
+    public function history ()
+    {
+        $cards = $this->cards()->pluck('id');
+        $result = HistoryTransaction::whereIn('card_id',$cards)
+            ->orWhereIn('receiver_card_id', $cards)
+//            ->with('card')
+//            ->whereHas('card', function($q) use ($cards){
+//                $q->whereIn('id',$cards);
+//            })
+            ->latest()->get();
+//            ->toArray();
+
+        return $result;
+    }
+
+    public function isMyCard (int $id)
+    {
+        return $this->cards()->get()->contains(function ($v) use ($id){
+
+            return $v->id === $id;
+        });
+    }
     public static function adminlte_image()
     {
         return 'https://picsum.photos/300/300';

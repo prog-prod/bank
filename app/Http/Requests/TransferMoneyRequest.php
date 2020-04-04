@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CardRequest extends FormRequest
+class TransferMoneyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' =>'required_if:payment_type,cc|integer|digits:16|unique:cards,number',
-            'date' =>'required|date|after:today',
-            'cvv' =>'required|integer|digits:3',
+            'user_from' => 'required|integer|exists:App\User,id',
+            'user_to' => 'required|integer|exists:App\User,id|different:user_from',
+            'amount' => 'required|integer|min:1',
         ];
     }
 }

@@ -16,13 +16,4 @@ class IndexController extends MainController
         return view('index');
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function transferMoney ()
-    {
-        return view('transfer-money', [
-            'users' => User::all()
-        ]);
-    }
 }

@@ -26,7 +26,7 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Card Number</th>
-                                <th>Card Date</th>
+                                <th>Expired Date</th>
                                 <th>CVV</th>
                                 <th>Amount</th>
                                 <th>Created at</th>
@@ -39,7 +39,7 @@
                                     <td>{{$card->number}}</td>
                                     <td>{{$card->date}}</td>
                                     <td>***</td>
-                                    <td>{{ $card->account->amount }}</td>
+                                    <td>{{ $card->account->amount }} UAH</td>
                                     <td>{{$card->created_at}}</td>
                                     <td>
                                         <form action="{{route('credit_cards.destroy',['credit_card' => $card->id])}}" method="post">

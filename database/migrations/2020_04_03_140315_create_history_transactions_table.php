@@ -15,11 +15,11 @@ class CreateHistoryTransactionsTable extends Migration
     {
         Schema::create('history_transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('card_id');
+            $table->unsignedInteger('receiver_card_id');
             $table->unsignedDouble('amount',10,2)->unsigned();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('receiver_card_id')->references('id')->on('cards');
             $table->foreign('card_id')->references('id')->on('cards');
         });
     }

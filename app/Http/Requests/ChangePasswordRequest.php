@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ChangeOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CardRequest extends FormRequest
+class ChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,9 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' =>'required_if:payment_type,cc|integer|digits:16|unique:cards,number',
-            'date' =>'required|date|after:today',
-            'cvv' =>'required|integer|digits:3',
+            'current_password' => [ 'required', new ChangeOldPassword() ],
+            'new_password' => [ 'required' ],
+            'new_confirm_password' => [ 'same:new_password' ],
         ];
     }
 }

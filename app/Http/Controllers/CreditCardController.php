@@ -24,7 +24,7 @@ class CreditCardController extends Controller
      */
     public function index()
     {
-        $creditCards = Card::paginate(10);
+        $creditCards = \Auth::user()->cards()->paginate(10);
         return view('credit-cards.index', compact('creditCards'));
     }
 
@@ -34,7 +34,6 @@ class CreditCardController extends Controller
      */
     public function create()
     {
-//        dd(\Auth::user()->generateCardNumber());
         return view('credit-cards.create');
     }
 

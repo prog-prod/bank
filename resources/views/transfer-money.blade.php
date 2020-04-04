@@ -3,6 +3,7 @@
 @section('title', 'Transfer money')
 
 @section('content_header')
+    @include('includes.messages')
     <h1>Transfer Money</h1>
 @stop
 
@@ -10,7 +11,7 @@
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="card">
-                <form role="form" action="{{route('transfer_money_store')}}" method="post">
+                <form role="form" action="{{route('transfer_money.store')}}" method="post">
                     @csrf
                     <div class="card-header">
                         <h3 class="card-title">Transfer Form</h3>
@@ -24,7 +25,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>User From </label>
-                                        <select class="form-control">
+                                        <select class="form-control" name="user_from" required>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}"> {{$user->email}}</option>
                                             @endforeach
@@ -35,7 +36,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>User To</label>
-                                        <select class="form-control">
+                                        <select class="form-control" name="user_to" required>
                                             @foreach($users as $user)
                                                 <option value="{{$user->id}}"> {{$user->email}}</option>
                                             @endforeach
@@ -49,7 +50,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">$</span>
                                         </div>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="amount" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">.00</span>
                                         </div>

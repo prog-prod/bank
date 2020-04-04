@@ -23,6 +23,7 @@
                             <label for="numberInput">Card Number</label>
                             <input type="text" name="number" class="form-control" id="numberInput" maxlength="16" minlength="16" placeholder="Card Number" value="{{old('card_number')}}" required>
                             <button class="btn btn-block btn-outline-primary mt-2" onclick="generateNumber()">Generate</button>
+                            <small>If the card has not been generated or is not valid use this <a href="https://generator-credit-card.com/">service</a>.</small>
                         </div>
                         <div class="form-group">
                             <label for="dateInput">Date</label>
