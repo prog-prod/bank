@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -9,7 +10,8 @@ class AdminController extends Controller
 
     public function users ()
     {
-        return view('admin.users.index');
+        $users = User::paginate(10);
+        return view('admin.users.index', compact('users'));
     }
 
     public function transactions()

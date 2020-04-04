@@ -23,16 +23,18 @@ class AddAdmin extends Command
     protected $description = 'Command description';
 
     private $hash;
+    private $adminRole;
 
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @param Hash $hash
      */
     public function __construct(Hash $hash)
     {
         parent::__construct();
         $this->hash = $hash;
+        $this->adminRole = config('admin.role');
     }
 
     /**
@@ -44,6 +46,7 @@ class AddAdmin extends Command
     {
         $this->setUpAdminAccount();
     }
+
     private function setUpAdminAccount(): void
     {
         $this->info("Let's create the admin account.");
@@ -54,7 +57,7 @@ class AddAdmin extends Command
             'name' => $name,
             'email' => $email,
             'password' => $this->hash->make($password),
-            'role' => 'user',
+            'role' =>  $this->adminRole,
         ]);
 
         $this->comment('Alrighty, your account has been created.');

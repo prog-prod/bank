@@ -3,16 +3,12 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+    @include('includes.messages')
     <h1>Create Credit Card</h1>
 @stop
 
 @section('content')
     <div class="container-fluid">
-        @if($errors->any())
-            <div class="alert alert-danger">
-                {!!   implode('', $errors->all('<div>:message</div>')) !!}
-            </div>
-        @endif
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
@@ -26,6 +22,7 @@
                         <div class="form-group">
                             <label for="numberInput">Card Number</label>
                             <input type="text" name="number" class="form-control" id="numberInput" maxlength="16" minlength="16" placeholder="Card Number" value="{{old('card_number')}}" required>
+                            <button class="btn btn-block btn-outline-primary mt-2" onclick="generateNumber()">Generate</button>
                         </div>
                         <div class="form-group">
                             <label for="dateInput">Date</label>
@@ -46,4 +43,14 @@
 
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        function generateNumber(){
+            $.get('/generate-card-number').then( d => {
+                $('#numberInput').val(d.card);
+            });
+        }
+    </script>
 @endsection

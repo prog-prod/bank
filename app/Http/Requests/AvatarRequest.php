@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CardRequest extends FormRequest
+class AvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' =>'required_if:payment_type,cc|integer|digits:16|unique:cards,number',
-            'date' =>'required|date',
-            'cvv' =>'required|integer|digits:3',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

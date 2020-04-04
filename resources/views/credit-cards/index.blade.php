@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+    @include('includes.messages')
     <h1>My Credit Cards</h1>
 @stop
 
@@ -13,16 +14,10 @@
                 <div class="card-header">
                     <h3 class="card-title">Credit Cards Table</h3>
 
-                    {{$creditCards->links()}}
-{{--                    <div class="card-tools">--}}
-{{--                        <ul class="pagination pagination-sm float-right">--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">«</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">»</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
+
+                    <div class="card-tools">
+                        {{$creditCards->links()}}
+                    </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
@@ -31,6 +26,9 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Card Number</th>
+                                <th>Card Date</th>
+                                <th>CVV</th>
+                                <th>Amount</th>
                                 <th>Created at</th>
                             </tr>
                         </thead>
@@ -40,7 +38,16 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$card->number}}</td>
                                     <td>{{$card->date}}</td>
+                                    <td>***</td>
+                                    <td>{{ $card->account->amount }}</td>
                                     <td>{{$card->created_at}}</td>
+                                    <td>
+                                        <form action="{{route('credit_cards.destroy',['credit_card' => $card->id])}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-block btn-outline-danger btn-xs"><i class="fas fa-times"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
 
                             @empty

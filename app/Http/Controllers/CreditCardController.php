@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Events\replenishAccount;
 use App\Http\Requests\CardRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CreditCardController extends Controller
 {
+
+    private $replenishMoney;
+
+    public function __construct()
+    {
+        $this->replenishMoney = (int) config('replenish.money');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,19 +34,37 @@ class CreditCardController extends Controller
      */
     public function create()
     {
+//        dd(\Auth::user()->generateCardNumber());
         return view('credit-cards.create');
     }
 
 
     /**
      * @param CardRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CardRequest $request)
     {
-        $data = $request->validated();
+        $data = collect($request->validated())->map(function ($name,$key) {
 
-        $request->user()->cards()->create();
-        return back();
+            if($key === 'cvv')
+            {
+                return Hash::make($name);
+            }
+            return $name;
+        });
+
+        $createCard = $request->user()->createCard($data->toArray());
+
+        if($createCard)
+        {
+            $request->user()->replenishAccount($this->replenishMoney,$createCard->id);
+            event(new replenishAccount($request->user()->email, 'Replenish your account', $this->replenishMoney));
+
+            return back()->with('success', 'A Credit Card has been created');
+        }
+
+        return back()->withErrors( ['error' => 'The Card is not valid.']);
     }
 
     /**
@@ -78,11 +104,13 @@ class CreditCardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $request->user()->deleteCard($id);
+        return redirect()->route('credit_cards.index')->with('success', 'A Credit Card has been deleted');
     }
 }

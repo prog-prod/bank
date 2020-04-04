@@ -2,15 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class IndexController extends MainController
 {
 
-    public function index(){
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
         return view('index');
     }
-    public function transferMoney () {
-        return view('transfer-money');
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function transferMoney ()
+    {
+        return view('transfer-money', [
+            'users' => User::all()
+        ]);
     }
 }

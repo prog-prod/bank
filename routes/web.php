@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'IndexController@index');
 Route::get('/transfer-money', 'IndexController@transferMoney')->name('transfer_money');
+Route::post('/transfer-money', 'IndexController@transferMoneyStore')->name('transfer_money_store');
 
 Auth::routes(['verify' => true]);
 
@@ -22,6 +23,13 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware'=>'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home/change-password', 'HomeController@changePassword')->name('home.change_password');
+    Route::post('/home/update-avatar', 'HomeController@updateAvatar')->name('home.update_avatar');
+
+    Route::get('generate-card-number', function () {
+        return response()->json([
+            'card' => \Auth::user()->generateCardNumber()
+        ]);
+    });
 
     Route::resource('credit_cards', 'CreditCardController');
 

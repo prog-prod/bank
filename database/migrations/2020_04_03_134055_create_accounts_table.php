@@ -15,11 +15,11 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('card_id');
             $table->unsignedDouble('amount',10,2)->unsigned()->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('card_id')->references('id')->on('cards');
         });
 
     }
