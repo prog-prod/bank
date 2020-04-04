@@ -262,21 +262,23 @@ class User extends Authenticatable  implements MustVerifyEmail
             ->sum('amount');
     }
 
+    /**
+     * @return mixed
+     */
     public function history ()
     {
         $cards = $this->cards()->pluck('id');
         $result = HistoryTransaction::whereIn('card_id',$cards)
             ->orWhereIn('receiver_card_id', $cards)
-//            ->with('card')
-//            ->whereHas('card', function($q) use ($cards){
-//                $q->whereIn('id',$cards);
-//            })
             ->latest()->get();
-//            ->toArray();
 
         return $result;
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function isMyCard (int $id)
     {
         return $this->cards()->get()->contains(function ($v) use ($id){
@@ -284,14 +286,4 @@ class User extends Authenticatable  implements MustVerifyEmail
             return $v->id === $id;
         });
     }
-    public static function adminlte_image()
-    {
-        return 'https://picsum.photos/300/300';
-    }
-
-    public static function adminlte_desc()
-    {
-        return 'That\'s a nice guy';
-    }
-
 }

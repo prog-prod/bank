@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\HistoryTransaction;
 use App\Http\Requests\AvatarRequest;
 use Illuminate\Http\Request;
 
-class HomeController extends MainController
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -35,8 +34,8 @@ class HomeController extends MainController
      * @param AvatarRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateAvatar(AvatarRequest $request){
-
+    public function updateAvatar(AvatarRequest $request)
+    {
         $request->validated();
         $avatarName = $request->user()->id.'_avatar'.time().'.'.$request->file('avatar')->getClientOriginalExtension();
 

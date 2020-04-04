@@ -25,24 +25,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9535a77a-1482-476f-a0d4-3702b0eea214" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/change-password.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Card.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/HistoryTransaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/HistoryTransaction.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CreditCardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CreditCardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TransferMoneyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TransferMoneyController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_03_140315_create_history_transactions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_03_140315_create_history_transactions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/transactions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/transactions/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/credit-cards/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/credit-cards/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/credit-cards/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/credit-cards/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/transfer-money.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/transfer-money.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +190,7 @@
       <option name="presentableId" value="Default" />
       <updated>1585919257257</updated>
       <workItem from="1585919260496" duration="24300000" />
-      <workItem from="1585984843699" duration="35203000" />
+      <workItem from="1585984843699" duration="35999000" />
     </task>
     <servers />
   </component>

@@ -32,26 +32,6 @@
                 <div class="card-header">History transaction</div>
                 <div class="card-body">
                     <div class="card-body table-responsive p-0">
-{{--                        <table class="table table-hover">--}}
-{{--                            <thead>--}}
-{{--                            <tr>--}}
-{{--                                <th>#</th>--}}
-{{--                                <th>Receiver</th>--}}
-{{--                                <th>Amount</th>--}}
-{{--                                <th>When</th>--}}
-{{--                            </tr>--}}
-{{--                            </thead>--}}
-{{--                            <tbody>--}}
-{{--                            <tr >--}}
-{{--                                <td>183</td>--}}
-{{--                                <td>John Doe</td>--}}
-{{--                                <td>11-7-2014</td>--}}
-{{--                                <td><span class="tag tag-success">Approved</span></td>--}}
-{{--                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>--}}
-{{--                            </tr>--}}
-
-{{--                        </table>--}}
-
                         @foreach($historyTransactions as $history)
                             @php($text = Auth::user()->isMyCard($history->receiverCard->id) ? 'success' : 'danger')
                             <div class="callout callout-{{$text}}">

@@ -24,7 +24,7 @@ Route::group(['middleware'=>'auth'], function () {
         ]);
     });
 
-    Route::resource('credit_cards', 'CreditCardController');
+    Route::resource('credit_cards', 'CreditCardController')->except(['show','edit','update']);
 
     Route::group([ 'prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.' ], function () {
         Route::get('users', 'AdminController@users')->name('users');

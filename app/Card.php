@@ -57,10 +57,17 @@ class Card extends Model
         ]);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function historyTransactions ()
     {
         return $this->hasMany('App\HistoryTransaction','card_id','id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function historyReceiverTransactions ()
     {
         return $this->hasMany('App\HistoryTransaction','receiver_card_id','id');

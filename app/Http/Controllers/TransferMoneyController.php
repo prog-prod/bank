@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TransferMoneyRequest;
 use App\User;
-use Illuminate\Http\Request;
 
 class TransferMoneyController extends Controller
 {
@@ -25,7 +24,6 @@ class TransferMoneyController extends Controller
      */
     public function store (TransferMoneyRequest $request)
     {
-
         $receiver = User::find($request->user_to);
 
         User::find($request->user_from)->transferMoney($receiver,$request->amount);
