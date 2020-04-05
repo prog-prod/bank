@@ -29,7 +29,13 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">History transaction</div>
+                <div class="card-header">
+                    <h3 class="card-title">History transaction</h3>
+
+                    <div class="card-tools">
+                        {{$historyTransactions->links()}}
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="card-body table-responsive p-0">
                         @foreach($historyTransactions as $history)

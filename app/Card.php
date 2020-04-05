@@ -19,6 +19,12 @@ class Card extends Model
         'cvv'
     ];
 
+    protected $casts = [
+        'exp_date' => 'date:m/y',
+    ];
+
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

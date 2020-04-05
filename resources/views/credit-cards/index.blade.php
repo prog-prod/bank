@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body card-body table-responsive p-0">
                     <table class="table">
                         <thead>
                             <tr>
@@ -37,10 +37,10 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$card->number}}</td>
-                                    <td>{{$card->date}}</td>
+                                    <td>{{$card->exp_date->format('m/y')}}</td>
                                     <td>***</td>
                                     <td>{{ $card->account->amount }} UAH</td>
-                                    <td>{{$card->created_at}}</td>
+                                    <td>{{$card->created_at->format('d.m.Y H:i:s')}}</td>
                                     <td>
                                         <form action="{{route('credit_cards.destroy',['credit_card' => $card->id])}}" method="post">
                                             @csrf

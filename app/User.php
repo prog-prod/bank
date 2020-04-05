@@ -147,16 +147,15 @@ class User extends Authenticatable  implements MustVerifyEmail
     }
 
     /**
+     * @param int $paginate
      * @return mixed
      */
-    public function history ()
+    public function getHistory (int $paginate)
     {
         $cards = $this->cards()->pluck('id');
-        $result = HistoryTransaction::whereIn('card_id',$cards)
+        return HistoryTransaction::whereIn('card_id',$cards)
             ->orWhereIn('receiver_card_id', $cards)
-            ->latest()->get();
-
-        return $result;
+            ->latest()->paginate($paginate);
     }
 
     /**
@@ -169,5 +168,15 @@ class User extends Authenticatable  implements MustVerifyEmail
 
             return $v->id === $id;
         });
+    }
+
+    public function adminlte_image()
+    {
+        return '/storage/avatars/'.$this->avatar;
+    }
+
+    public function adminlte_desc()
+    {
+        return 'That\'s a nice guy';
     }
 }

@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         return view('home',[
-            'historyTransactions' => $request->user()->history(),
+            'historyTransactions' => $request->user()->getHistory(10),
             'cards' => $request->user()->cards()->get()
         ]);
     }

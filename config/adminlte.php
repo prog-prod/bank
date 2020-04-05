@@ -207,7 +207,11 @@ return [
     |
     */
 
+    'usermenu_image' => '/storage/avatars/user.jpg',
+
+
     'menu' => [
+
         [
             'text' => 'search',
             'search' => true,

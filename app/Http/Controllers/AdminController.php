@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function users ()
     {
-        $users = User::paginate(10);
+        $users = User::latest()->paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     public function transactions()
     {
-        $transactions = HistoryTransaction::paginate(10);
+        $transactions = HistoryTransaction::latest()->paginate(10);
         return view('admin.transactions.index', compact('transactions'));
     }
 }
