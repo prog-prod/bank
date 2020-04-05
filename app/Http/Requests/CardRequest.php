@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\CheckCardNumber;
-use App\Rules\CheckExpDate;
+use App\Rules\CheckExpDateFormat;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CardRequest extends FormRequest
@@ -27,7 +27,7 @@ class CardRequest extends FormRequest
     {
         return [
             'number' => ['required','integer','digits:16','unique:cards,number', new CheckCardNumber()],
-            'exp_date' => ['required', new CheckExpDate()],
+            'exp_date' => ['required', new CheckExpDateFormat()],
             'cvv' =>'required|integer|digits:3',
         ];
     }

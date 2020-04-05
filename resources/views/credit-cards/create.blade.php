@@ -26,8 +26,8 @@
                             <small>If the card has not been generated or is not valid use this <a href="https://generator-credit-card.com/">service</a>.</small>
                         </div>
                         <div class="form-group">
-                            <label for="dateInput">Exp Date</label>
-                            <input type="text" name="exp_date" class="form-control" id="dateInput" placeholder="Date" maxlength="5" minlength="5" value="{{old('exp_date')}}" required>
+                            <label for="expInput">Exp Date</label>
+                            <input type="text" name="exp_date" class="form-control expDateInput" id="expInput" placeholder="Date" maxlength="5" minlength="5" value="{{old('exp_date')}}" required>
                         </div>
                         <div class="form-group">
                             <label for="cvvInput">CVV</label>
@@ -53,9 +53,5 @@
                 $('#numberInput').val(d.card);
             });
         }
-        $('#dateInput').keyup(function (e) {
-            if(this.value.length === 2 && e.keyCode !== 8)
-                this.value += '/'
-        });
     </script>
 @endsection

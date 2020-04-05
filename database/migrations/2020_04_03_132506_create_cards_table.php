@@ -21,7 +21,7 @@ class CreateCardsTable extends Migration
             $table->string('cvv');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
 
         });
     }

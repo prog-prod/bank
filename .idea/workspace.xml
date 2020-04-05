@@ -26,7 +26,23 @@
   <component name="ChangeListManager">
     <list default="true" id="9535a77a-1482-476f-a0d4-3702b0eea214" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TransferMoneyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TransferMoneyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/TransferMoneyRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/TransferMoneyRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/TransferMoney.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/TransferMoney.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Rules/CheckExpDate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Rules/CheckExpDateFormat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/adminlte.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/adminlte.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_03_132506_create_cards_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_03_132506_create_cards_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_03_134055_create_accounts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_03_134055_create_accounts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/transactions/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/transactions/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/credit-cards/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/credit-cards/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/replenish.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/replenish.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/transfer-money.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/transfer-money.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,11 +179,26 @@
       <recent name="C:\Program Files\OSPanel\domains\work\bank\public\storage\avatars" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="PHPUnit.phpunit.xml">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <configuration name="watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.watch" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -181,7 +212,7 @@
       <updated>1585919257257</updated>
       <workItem from="1585919260496" duration="24300000" />
       <workItem from="1585984843699" duration="36591000" />
-      <workItem from="1586075037612" duration="19271000" />
+      <workItem from="1586075037612" duration="32313000" />
     </task>
     <servers />
   </component>
@@ -189,14 +220,34 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1586084528056">
+    <state x="614" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586103882092">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586084528056" />
+    <state x="614" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586103882092" />
+    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1586107370116">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586107370116" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1585991437801">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1585991437801" />
+    <state width="1877" height="262" key="GridCell.Tab.0.bottom" timestamp="1586101368457">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="262" key="GridCell.Tab.0.bottom/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586101368457" />
+    <state width="1877" height="262" key="GridCell.Tab.0.center" timestamp="1586101368456">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="262" key="GridCell.Tab.0.center/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586101368456" />
+    <state width="1877" height="262" key="GridCell.Tab.0.left" timestamp="1586101368455">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="262" key="GridCell.Tab.0.left/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586101368455" />
+    <state width="1877" height="262" key="GridCell.Tab.0.right" timestamp="1586101368456">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="262" key="GridCell.Tab.0.right/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586101368456" />
     <state x="795" y="440" key="NewPhpFileDialog" timestamp="1585935721187">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

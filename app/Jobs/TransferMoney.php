@@ -16,21 +16,21 @@ class TransferMoney implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $user;
-    private $receiver;
+    private $cardFrom;
+    private $cardTo;
     private $amount;
 
     /**
      * Create a new job instance.
      *
-     * @param User $user
-     * @param User $receiver
+     * @param Card $cardFrom
+     * @param Card $cardTo
      * @param int $amount
      */
-    public function __construct(User $user,User $receiver, int $amount)
+    public function __construct(Card $cardFrom,Card $cardTo, int $amount)
     {
-        $this->user = $user;
-        $this->receiver = $receiver;
+        $this->cardFrom = $cardFrom;
+        $this->cardTo = $cardTo;
         $this->amount = $amount;
     }
 
@@ -38,58 +38,39 @@ class TransferMoney implements ShouldQueue
      * Execute the job.
      *
      * @return void
+     * @throws \Exception
      */
     public function handle()
     {
-        $this->transferMoney();
-    }
-
-    private function transferMoney ()
-    {
-        #1 get random user card
-        $receiverCard = $this->receiver->cards()->get()->random();
-
-        #2 transfer money
+        #1 transfer money
         DB::beginTransaction();
 
-        try
+        # replenish receiver card;
+        $this->cardTo->replenish($this->amount);
+
+        # check cards if amount >= money
+
+        if($this->cardFrom->account->amount < $this->amount)
         {
-            # replenish receiver card;
-            $receiverCard->replenish($this->amount);
-
-            #get my cards where amount >= receive money
-            $myCards = $this->user->cards()->whereHas('account', function ($q) {
-                $q->where('amount','>', $this->amount-1);
-            })->get();
-
-            if($myCards->isEmpty())
-            {
-                throw new \Exception('There is not enough money in the account to make a transfer');
-            }
-
-            $myCard = $myCards->random();
-
-            # withdraw cash
-            $myCard->withdraw($this->amount);
-
-            $this->writeToHistory($myCard);
-            DB::commit();
+            throw new \Exception('There is not enough money in the account to make a transfer');
         }
-        catch (\Exception $e)
-        {
-            DB::rollBack();
-            echo $e->getMessage();
-        }
+
+        # withdraw cash
+        $this->cardFrom->withdraw($this->amount);
+
+        $this->writeToHistory();
+        DB::commit();
     }
 
+
     /**
-     * @param Card $myCard
+     *
      */
-    private function writeToHistory (Card $myCard): void
+    private function writeToHistory (): void
     {
         $data = [
-            'card_id' => $myCard->id,
-            'receiver_card_id' => $this->receiver->id,
+            'card_id' => $this->cardFrom->id,
+            'receiver_card_id' => $this->cardTo->id,
             'amount' => $this->amount
         ];
         HistoryTransaction::putTransaction($data);

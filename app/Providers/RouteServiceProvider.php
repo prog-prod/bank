@@ -33,6 +33,11 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+//        Route::model('user', \App\User::class);
+        Route::bind('user', function ($value) {
+            return \App\User::where('id', $value)->first()->cards()->get() ?? abort(404);
+        });
     }
 
     /**

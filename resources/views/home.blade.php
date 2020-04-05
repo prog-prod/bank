@@ -38,14 +38,16 @@
                 </div>
                 <div class="card-body">
                     <div class="card-body table-responsive p-0">
-                        @foreach($historyTransactions as $history)
+                        @forelse($historyTransactions as $history)
                             @php($text = Auth::user()->isMyCard($history->receiverCard->id) ? 'success' : 'danger')
                             <div class="callout callout-{{$text}}">
                                 <h5>{{$history->card->number}} <i class="fas fa-arrow-right"></i> {{$history->receiverCard->number}} | <b class="text-{{$text}}"> @if($text == 'success'){{'+'}} @else{{'-'}}@endif {{$history->amount}} UAH</b></h5>
 
                                 <p>When: {{$history->created_at->format('d.m.Y h:i:s')}}</p>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="text-left">You hadn't transactions.</div>
+                        @endforelse
                     </div>
                 </div>
             </div>

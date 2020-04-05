@@ -4,6 +4,6 @@
 <p> Your card:</p>
 <ul>
     <li><b>Card Number:</b> {{$card->number}} </li>
-    <li><b>Exp Date:</b> {{$card->exp_date}} </li>
+    <li><b>Exp Date:</b> {{$card->exp_date->format('m/y')}} </li>
     <li><b>Cvv:</b> *** </li>
 </ul>

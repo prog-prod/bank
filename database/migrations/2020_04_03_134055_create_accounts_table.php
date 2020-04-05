@@ -19,7 +19,7 @@ class CreateAccountsTable extends Migration
             $table->unsignedDouble('amount',10,2)->unsigned()->default(0);
             $table->timestamps();
 
-            $table->foreign('card_id')->references('id')->on('cards');
+            $table->foreign('card_id')->references('id')->on('cards')->cascadeOnDelete();
         });
 
     }

@@ -32,12 +32,12 @@
                         </thead>
                         <tbody>
                         @foreach($transactions as $transaction)
-                            <tr @if($transaction->card->user->id === Auth::user()->id) class="bg-success"@endif>
+                            <tr class="@if(Auth::user()->isMyCard($transaction->card->id)) bg-danger @elseif(Auth::user()->isMyCard($transaction->receiverCard->id)) bg-success @endif">
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$transaction->card->number}} <br> {{$transaction->card->user->email}}</td>
-                                <td>{{$transaction->receiverCard->number}} <br> {{$transaction->receiverCard->user->email}}</td>
+                                <td><b> {{$transaction->card->number}}</b> <br> {{$transaction->card->user->email}}</td>
+                                <td><b> {{$transaction->receiverCard->number}}</b> <br> {{$transaction->receiverCard->user->email}}</td>
                                 <td>{{$transaction->amount}} UAH</td>
-                                <td>{{$transaction->created_at}}</td>
+                                <td>{{$transaction->created_at->format('d.m.Y H:i:s')}}</td>
                             </tr>
                         @endforeach
                         </tbody>

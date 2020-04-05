@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -65,10 +65,10 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -207,16 +207,9 @@ return [
     |
     */
 
-    'usermenu_image' => '/storage/avatars/user.jpg',
-
 
     'menu' => [
 
-        [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
         [
             'text' => 'For Admins',
             'can'  => 'is-admin',
@@ -385,6 +378,22 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        [
+            'name' => 'App',
+            'active' => true,
+            'files' => [
+//                [
+//                    'type' => 'css',
+//                    'asset' => false,
+//                    'location' => '/js/app.css',
+//                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/js/app.js',
                 ],
             ],
         ],

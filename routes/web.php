@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'IndexController@index');
-Route::get('/transfer-money', 'TransferMoneyController@index')->name('transfer_money.index');
-Route::post('/transfer-money', 'TransferMoneyController@store')->name('transfer_money.store');
+Route::group(['prefix' => 'transfer-money', 'as' => 'transfer_money.'], function () {
+    Route::get('/', 'TransferMoneyController@index')->name('index');
+    Route::post('/transfer-money','TransferMoneyController@store')->name('store');
+    Route::get('/get-cards/{user?}', 'TransferMoneyController@getCards')->name('get_cards');
+});
 
 Auth::routes(['verify' => true]);
-
 
 Route::group(['middleware'=>'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
