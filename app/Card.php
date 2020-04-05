@@ -15,7 +15,7 @@ class Card extends Model
      */
     protected $fillable = [
         'number',
-        'date',
+        'exp_date',
         'cvv'
     ];
 
@@ -55,6 +55,72 @@ class Card extends Model
         return $this->account()->update([
             'amount' => DB::raw('amount-'.$money)
         ]);
+    }
+
+
+    /** Check a card number of Luna algorithm
+     * @param string $number
+     * @return bool
+     */
+    public static function checkCard(string $number)
+    {
+        $result = [];
+        # 1.
+        for ($i = 0; $i < strlen($number); $i++)
+        {
+            $result[$i] = (int) $number[$i];
+            if(($i+1) % 2 !== 0) {
+                $result[$i] =  ($number[$i] * 2);
+                #2
+                if($result[$i] > 9){
+                    $result[$i] -= 9;
+                }
+            }
+        }
+
+        #3
+        if(array_sum($result) % 10 === 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param int|null $number
+     * @return int
+     */
+    public static function generateCardNumber (int $number = null)
+    {
+
+        if($number === null)
+        {
+            $number = rand(1111111111111111,9999999999999999);
+        }
+
+        $arrayNumber = array_map('intval', str_split($number));
+        $arraySum = array_sum($arrayNumber);
+
+
+        if($arraySum % 10 !== 0)
+        {
+
+            $difference = round($arraySum/10)*10 - $arraySum ;
+
+            foreach($arrayNumber as &$value)
+            {
+                if(($value+$difference) >= 0 && ($value+$difference) < 10)
+                {
+                    $value += $difference;
+                    break;
+                }
+            }
+
+            self::generateCardNumber((int)implode('', $arrayNumber));
+
+        }
+
+        return $number;
     }
 
     /**

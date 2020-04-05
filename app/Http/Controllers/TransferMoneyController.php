@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TransferMoneyRequest;
+use App\Jobs\TransferMoney;
 use App\User;
 
 class TransferMoneyController extends Controller
@@ -26,7 +27,7 @@ class TransferMoneyController extends Controller
     {
         $receiver = User::find($request->user_to);
 
-        User::find($request->user_from)->transferMoney($receiver,$request->amount);
+        TransferMoney::dispatch(User::find($request->user_from), $receiver, $request->amount);
 
         return back()
         ->with('success',"You have successfully transfer money to {$receiver->email}.");

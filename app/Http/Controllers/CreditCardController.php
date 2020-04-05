@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Card;
 use App\Events\replenishAccount;
 use App\Http\Requests\CardRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,13 +47,17 @@ class CreditCardController extends Controller
      */
     public function store(CardRequest $request)
     {
-        $data = collect($request->validated())->map(function ($name,$key) {
+        $data = collect($request->validated())->map(function ($val,$key) {
 
+            if($key === 'exp_date')
+            {
+                return Carbon::createFromFormat('d/m/y','01/'.$val)->format('Y-m-d');
+            }
             if($key === 'cvv')
             {
-                return Hash::make($name);
+                return Hash::make($val);
             }
-            return $name;
+            return $val;
         });
 
         $createCard = $request->user()->createCard($data->toArray());
@@ -61,7 +65,7 @@ class CreditCardController extends Controller
         if($createCard)
         {
             $request->user()->replenishAccount($this->replenishMoney,$createCard->id);
-            event(new replenishAccount($request->user()->email, 'Replenish your account', $this->replenishMoney));
+            event(new replenishAccount($request->user()->email, 'Replenish your account', $this->replenishMoney, $createCard));
 
             return back()->with('success', 'A Credit Card has been created');
         }

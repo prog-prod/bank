@@ -28,6 +28,6 @@ class replenishAccountListener
      */
     public function handle($event)
     {
-        Mail::to($event->mailTo)->queue(new ReplenishMail($event->mailSubject, $event->money));
+        Mail::to($event->mailTo)->queue(new ReplenishMail($event->mailSubject, $event->money, $event->card));
     }
 }

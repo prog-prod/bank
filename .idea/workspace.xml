@@ -27,16 +27,17 @@
     <list default="true" id="9535a77a-1482-476f-a0d4-3702b0eea214" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Card.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/HistoryTransaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/HistoryTransaction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ChangePasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/replenishAccount.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/replenishAccount.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CreditCardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CreditCardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MainController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TransferMoneyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TransferMoneyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/replenishAccountListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/replenishAccountListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/ReplenishMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/ReplenishMail.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/queue.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_03_132506_create_cards_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_03_132506_create_cards_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/credit-cards/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/credit-cards/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/replenish.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/replenish.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -165,7 +166,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/storage/avatars" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -190,7 +191,8 @@
       <option name="presentableId" value="Default" />
       <updated>1585919257257</updated>
       <workItem from="1585919260496" duration="24300000" />
-      <workItem from="1585984843699" duration="35999000" />
+      <workItem from="1585984843699" duration="36591000" />
+      <workItem from="1586075037612" duration="9578000" />
     </task>
     <servers />
   </component>
@@ -198,10 +200,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1586005995316">
+    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1586084528056">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586005995316" />
+    <state x="690" y="276" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/304.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1586084528056" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1585991437801">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Card;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,9 +16,9 @@ class replenishAccount
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $mailTo;
-    public $mailFrom;
     public $mailSubject;
     public $money;
+    public $card;
 
     /**
      * Create a new event instance.
@@ -25,12 +26,14 @@ class replenishAccount
      * @param string $mailTo
      * @param string $mailSubject
      * @param int $money
+     * @param Card $card
      */
-    public function __construct(string $mailTo, string $mailSubject, int $money)
+    public function __construct(string $mailTo, string $mailSubject, int $money, Card $card)
     {
         $this->mailTo = $mailTo;
         $this->mailSubject = $mailSubject;
         $this->money = $money;
+        $this->card = $card;
     }
 
     /**

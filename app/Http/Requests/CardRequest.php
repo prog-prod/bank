@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\CheckCardNumber;
+use App\Rules\CheckExpDate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CardRequest extends FormRequest
@@ -24,8 +26,8 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' =>'required_if:payment_type,cc|integer|digits:16|unique:cards,number',
-            'date' =>'required|date|after:today',
+            'number' => ['required','integer','digits:16','unique:cards,number', new CheckCardNumber()],
+            'exp_date' => ['required', new CheckExpDate()],
             'cvv' =>'required|integer|digits:3',
         ];
     }

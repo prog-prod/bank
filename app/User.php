@@ -67,81 +67,23 @@ class User extends Authenticatable  implements MustVerifyEmail
      */
     public function replenishAccount (int $money, int $cardId)
     {
-        return $this->cards()->find($cardId)->replenish($money);
-    }
+        $find = $this->cards()->find($cardId);
 
-    /**
-     * @param string $number
-     * @return bool
-     */
-    public function checkCard(string $number)
-    {
-        $result = [];
-        # 1.
-        for ($i = 0; $i < strlen($number); $i++)
+        if(!$find)
         {
-            $result[$i] = (int) $number[$i];
-            if(($i+1) % 2 !== 0) {
-                $result[$i] =  ($number[$i] * 2);
-                #2
-                if($result[$i] > 9){
-                    $result[$i] -= 9;
-                }
-            }
+            return false;
         }
 
-        #3
-        if(array_sum($result) % 10 === 0){
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param int|null $number
-     * @return int
-     */
-    public function generateCardNumber (int $number = null)
-    {
-
-        if($number === null)
-        {
-            $number = rand(1111111111111111,9999999999999999);
-        }
-
-        $arrayNumber = array_map('intval', str_split($number));
-        $arraySum = array_sum($arrayNumber);
-
-
-        if($arraySum % 10 !== 0)
-        {
-
-            $difference = round($arraySum/10)*10 - $arraySum ;
-
-            foreach($arrayNumber as &$value)
-            {
-                if(($value+$difference) >= 0 && ($value+$difference) < 10)
-                {
-                    $value += $difference;
-                    break;
-                }
-            }
-
-            $this->generateCardNumber((int)implode('', $arrayNumber));
-
-        }
-
-        return $number;
+        return $find->replenish($money);
     }
 
     /**
      * @param array $data
      * @return bool|mixed
      */
-    public function createCard (array $data)
+    public function createCard (array $data): Card
     {
-        if(!$this->checkCard($data['number']))
+        if(!Card::checkCard($data['number']))
         {
             return false;
         }
@@ -193,64 +135,6 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->save();
     }
 
-    # Transfer money to the user
-
-    /**
-     * @param User $receiver
-     * @param int $amount
-     */
-    public function transferMoney (User $receiver, int $amount)
-    {
-        #1 get random user card
-        $receiverCard = $receiver->cards()->get()->random();
-
-        #2 transfer money
-        DB::beginTransaction();
-
-        try
-        {
-            # replenish receiver card;
-            $receiverCard->replenish($amount);
-
-            #get my cards where amount >= receive money
-            $myCards = $this->cards()->whereHas('account', function ($q) use ($amount) {
-                $q->where('amount','>',$amount-1);
-            })->get();
-
-            if($myCards->isEmpty())
-            {
-                throw new \Exception('There is not enough money in the account to make a transfer');
-            }
-
-            $myCard = $myCards->random();
-
-            # withdraw cash
-            $myCard->withdraw($amount);
-
-            $this->writeToHistory($myCard, $receiverCard, $amount);
-            DB::commit();
-        }
-        catch (\Exception $e)
-        {
-            DB::rollBack();
-            echo $e->getMessage();
-        }
-    }
-
-    /**
-     * @param Card $myCard
-     * @param Card $receiverCard
-     * @param int $amount
-     */
-    public function writeToHistory (Card $myCard, Card $receiverCard, int $amount): void
-    {
-        $data = [
-            'card_id' => $myCard->id,
-            'receiver_card_id' => $receiverCard->id,
-            'amount' => $amount
-        ];
-        HistoryTransaction::putTransaction($data);
-    }
 
     /**
      * @return mixed

@@ -21,17 +21,17 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="numberInput">Card Number</label>
-                            <input type="text" name="number" class="form-control" id="numberInput" maxlength="16" minlength="16" placeholder="Card Number" value="{{old('card_number')}}" required>
+                            <input type="text" name="number" class="form-control" id="numberInput" maxlength="16" minlength="16" placeholder="Card Number" value="{{old('number')}}" required>
                             <button class="btn btn-block btn-outline-primary mt-2" onclick="generateNumber()">Generate</button>
                             <small>If the card has not been generated or is not valid use this <a href="https://generator-credit-card.com/">service</a>.</small>
                         </div>
                         <div class="form-group">
-                            <label for="dateInput">Date</label>
-                            <input type="date" name="date" class="form-control" id="dateInput" placeholder="Date" value="{{old('card_date')}}" required>
+                            <label for="dateInput">Exp Date</label>
+                            <input type="text" name="exp_date" class="form-control" id="dateInput" placeholder="Date" maxlength="5" minlength="5" value="{{old('exp_date')}}" required>
                         </div>
                         <div class="form-group">
                             <label for="cvvInput">CVV</label>
-                            <input type="text" name="cvv" class="form-control" id="cvvInput" placeholder="CVV"  maxlength="3" minlength="3" value="{{old('card_cvv')}}" required>
+                            <input type="text" name="cvv" class="form-control" id="cvvInput" placeholder="CVV"  maxlength="3" minlength="3" value="{{old('cvv')}}" required>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -53,5 +53,9 @@
                 $('#numberInput').val(d.card);
             });
         }
+        $('#dateInput').keyup(function (e) {
+            if(this.value.length === 2 && e.keyCode !== 8)
+                this.value += '/'
+        });
     </script>
 @endsection

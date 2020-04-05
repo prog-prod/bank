@@ -20,7 +20,7 @@ Route::group(['middleware'=>'auth'], function () {
 
     Route::get('generate-card-number', function () {
         return response()->json([
-            'card' => \Auth::user()->generateCardNumber()
+            'card' => App\Card::generateCardNumber()
         ]);
     });
 
